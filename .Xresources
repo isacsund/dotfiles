@@ -1,0 +1,54 @@
+!-----------------------------------------------------------------------
+!                         Xft settings
+!-----------------------------------------------------------------------
+
+Xft.dpi:                96
+Xft.autohint:           false
+Xft.antialias:          true
+Xft.rgba:               rgb
+Xft.hinting:            true
+Xft:hintstyle:          hintslight       
+Xft.lcdfilter:          lcddefault
+
+
+!-----------------------------------------------------------------------
+!                        URxvt settings 
+!-----------------------------------------------------------------------
+
+URxvt.internalBorder:    15
+URxvt.externalBorder:    5
+!URxvt.lineSpace:        0
+!urxvt*shading:          30
+URxvt.depth:             32
+URxvt.saveLines:         10000
+URxvt*geometry:          96x30
+!URxvt*terminalName:     rxvt-unicode-256color
+URxvt*visualBell:        false
+
+! Scrollbar
+URxvt.scrollBar:          false
+URxvt.scrollBar_right:    false
+URxvt.scrollBar_floating: false
+URxvt.scrollstyle:        rxvt
+URxvt*scrollTtyOutput:    false
+URxvt*scrollWithBuffer:   true
+URxvt*scrollTtyKeypress:  true
+
+! Fonts
+URxvt*font:             xft:iosevka-regular:size=10
+URxvt.fontBold:         xft:iosevka-regular:size=10
+
+URxvt.letterSpace:      0
+
+! Enables copy/paste with Ctrl-Shift-C/V
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.perl-ext-common: default,clipboard
+
+! Cursor
+Xcursor.theme:             Venom
+
+! Color theme
+#include "/home/isac/.colors/gruvbox-dark"
