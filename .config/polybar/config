@@ -42,7 +42,7 @@ font-3 = Inconsolata Nerd Font:size=24;3
 
 modules-left = powermenu divider i3 ledge
 modules-center = 
-modules-right = redge mpd divider audio divider network pkg divider date weather
+modules-right = redge mpd divider audio keyboard divider network pkg divider date weather
 
 ;DIVIDER
 [module/divider]
@@ -181,6 +181,19 @@ ramp-volume-1 = ""
 ramp-volume-2 = ""
 ramp-volume-3 = ""
 ramp-volume-font = 1
+
+[module/keyboard]
+type = internal/xkeyboard
+
+format = <label-layout>
+format-spacing = 0
+
+label-layout = %icon% %layout%
+label-layout-padding = 1
+label-layout-foreground = ${colors.foreground}
+label-layout-background = ${colors.background}
+
+layout-icon-default =
 
 ;NETWORK
 [module/network]
