@@ -19,8 +19,13 @@ SPACESHIP_PROMPT_SEPARATE_LINE=false
 SPACESHIP_CHAR_SYMBOL=""
 SPACESHIP_GOLANG_SYMBOL=""
 
+source "$HOME/.config/zsh/abbreviations.zsh"
+
 # Export PATHs
 export GOPATH=$HOME/Projects/go
 
+export PATH="$PATH:$(yarn global bin)"
+export PATH=/home/isac/.mix/escripts:$PATH
+export PATH="$HOME/.cargo/bin:$PATH"
 # Aliases
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
