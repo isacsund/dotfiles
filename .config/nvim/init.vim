@@ -7,6 +7,7 @@ call plug#begin()
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
 Plug 'rust-lang/rust.vim'
+Plug 'preservim/nerdtree'
 
 " Semantic language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -59,6 +60,9 @@ set expandtab     " Spaces instead of tabs for better cross-editor compatibility
 " Color column at 120 characters
 set colorcolumn=80
 set textwidth=80
+
+" NerdTree
+map <C-n> :NERDTreeToggle<CR>
 
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
