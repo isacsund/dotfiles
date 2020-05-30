@@ -3,6 +3,9 @@
 " =============================================================================
 call plug#begin()
 
+" VIM enhancements
+Plug 'Rigellute/rigel'
+
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
@@ -60,6 +63,13 @@ set expandtab     " Spaces instead of tabs for better cross-editor compatibility
 " Color column at 120 characters
 set colorcolumn=80
 set textwidth=80
+
+" 24bit true color
+set termguicolors
+
+" Colorscheme
+syntax enable
+colorscheme rigel
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
