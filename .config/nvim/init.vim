@@ -60,6 +60,10 @@ set tabstop=4     " Two tab spaces
 set softtabstop=4 " Number of spaces to skip or insert when <BS>ing or <Tab>ing
 set expandtab     " Spaces instead of tabs for better cross-editor compatibility
 
+" Lightline
+let g:rigel_lightline = 1
+let g:lightline = { 'colorscheme': 'rigel' }
+
 " Color column at 120 characters
 set colorcolumn=80
 set textwidth=80
