@@ -35,8 +35,8 @@ URxvt*scrollWithBuffer:   true
 URxvt*scrollTtyKeypress:  true
 
 ! Fonts
-URxvt*font:             xft:iosevka-regular:size=10
-URxvt.fontBold:         xft:iosevka-regular:size=10
+URxvt*font:             xft:MesloLGS NF:size=10
+URxvt.fontBold:         xft:MesloLGS NF:size=10
 
 URxvt.letterSpace:      0
 
@@ -51,4 +51,4 @@ URxvt.perl-ext-common: default,clipboard
 Xcursor.theme:             Venom
 
 ! Color theme
-#include "/home/isac/.colors/gruvbox-dark"
+#include "/home/isac/.colors/rigel"
