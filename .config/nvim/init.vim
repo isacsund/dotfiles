@@ -9,7 +9,6 @@ Plug 'Rigellute/rigel'
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
 Plug 'dense-analysis/ale'
-Plug 'rust-lang/rust.vim'
 Plug 'preservim/nerdtree'
 
 " Semantic language support
