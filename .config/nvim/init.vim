@@ -4,7 +4,7 @@
 call plug#begin()
 
 " VIM enhancements
-Plug 'Rigellute/rigel'
+Plug 'morhetz/gruvbox'
 
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
@@ -27,7 +27,6 @@ call plug#end()
 " Rust
 let g:rustfmt_autosave = 1
 
-" Completion
 " Better display for messages
 set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -59,20 +58,19 @@ set tabstop=4     " Two tab spaces
 set softtabstop=4 " Number of spaces to skip or insert when <BS>ing or <Tab>ing
 set expandtab     " Spaces instead of tabs for better cross-editor compatibility
 
-" Lightline
-let g:rigel_lightline = 1
-let g:lightline = { 'colorscheme': 'rigel' }
-
-" Color column at 120 characters
+" Color column at 80 characters
 set colorcolumn=80
 set textwidth=80
 
 " 24bit true color
 set termguicolors
 
+" Gruvbox specific
+let g:gruvbox_contrast_dark='hard'
+
 " Colorscheme
 syntax enable
-colorscheme rigel
+colorscheme gruvbox
 
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
