@@ -14,4 +14,4 @@ Xft.lcdfilter:          lcddefault
 Xcursor.theme:             Venom
 
 ! Color theme
-#include "/home/isac/.colors/rigel"
+#include "/home/isac/.colors/gruvbox-dark"
