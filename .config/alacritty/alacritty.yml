@@ -32,15 +32,15 @@ window:
 font:
   size: 12.0
   normal:
-    family: Caskaydia Cove Nerd Font
+    family: Iosevka
     style: Regular
 
   bold:
-    family: Caskaydia Cove Nerd Font
+    family: Iosevka
     style: Regular
 
   italic:
-    family: Caskaydia Cove Nerd Font
+    family: Iosevka
     style: Regular
 
 # Base16 Gruvbox dark, hard 256 - alacritty color config
