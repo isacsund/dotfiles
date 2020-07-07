@@ -7,6 +7,7 @@ call plug#begin()
 
 " VIM enhancements
 Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
@@ -59,6 +60,10 @@ set shiftwidth=4  " Number of spaces to use in each autoindent step
 set tabstop=4     " Two tab spaces
 set softtabstop=4 " Number of spaces to skip or insert when <BS>ing or <Tab>ing
 set expandtab     " Spaces instead of tabs for better cross-editor compatibility
+
+" Lightline
+let g:lightline = {}
+let g:lightline.colorscheme = 'gruvbox'
 
 " Color column at 80 characters
 set colorcolumn=80
