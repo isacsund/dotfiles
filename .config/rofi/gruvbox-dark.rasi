@@ -7,7 +7,7 @@ configuration {
 }
  
 * {
-    background-color:            #282828;
+    background-color:            #1d2021;
     text-color:                  #ebdbb2;
     selbg:                       #458588;
     urgbg:                       #e53935;
@@ -30,11 +30,11 @@ configuration {
 window {
     border: 2;
     border-color: #a89984;
-    location:    west;
-    anchor:      south west;
+    location:    center;
+    anchor:      center;
     height:      50%;
     width:       17.5%;
-    y-offset: 35;
+    y-offset: 40;
     orientation: horizontal;
     font: "Iosevka 12";
 }

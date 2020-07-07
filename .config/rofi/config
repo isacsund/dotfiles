@@ -1,2 +1,2 @@
-rofi.theme: rigel
+rofi.theme: gruvbox-dark
 rofi.modi: combi,drun
