@@ -6,7 +6,6 @@ typeset -A abbrevs
 
 # General aliases
 abbrevs=(
-  "l"    "exa"
   "ls"   "exa"
   "ll"   "exa -l"
   "la"   "exa -la"
