@@ -6,8 +6,7 @@ let mapleader = "\<Space>"
 call plug#begin()
 
 " VIM enhancements
-Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'https://github.com/cocopon/iceberg.vim'
 
 " GUI enhancements
 Plug 'itchyny/lightline.vim'
@@ -64,7 +63,7 @@ set expandtab     " Spaces instead of tabs for better cross-editor compatibility
 
 " Lightline
 let g:lightline = {}
-let g:lightline.colorscheme = 'gruvbox'
+let g:lightline.colorscheme = 'iceberg'
 
 " Color column at 80 characters
 set colorcolumn=80
@@ -78,7 +77,7 @@ let g:gruvbox_contrast_dark='hard'
 
 " Colorscheme
 syntax enable
-colorscheme gruvbox
+colorscheme iceberg
 
 " =============================================================================
 " # Keyboard shortcuts
