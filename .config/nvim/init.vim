@@ -79,6 +79,10 @@ let g:gruvbox_contrast_dark='hard'
 syntax enable
 colorscheme iceberg
 
+" Show white space
+set listchars=eol:¬,tab:>·,trail:·,extends:>,precedes:<,space:·
+set list
+
 " =============================================================================
 " # Keyboard shortcuts
 " =============================================================================
