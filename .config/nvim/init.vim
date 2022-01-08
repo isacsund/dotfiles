@@ -1,3 +1,4 @@
+set shell=/bin/bash
 let mapleader = "\<Space>"
 
 " =============================================================================
@@ -6,30 +7,85 @@ let mapleader = "\<Space>"
 call plug#begin()
 
 " VIM enhancements
-Plug 'https://github.com/cocopon/iceberg.vim'
+Plug 'ciaranm/securemodelines'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'justinmk/vim-sneak'
 
 " GUI enhancements
-Plug 'itchyny/lightline.vim'
-Plug 'dense-analysis/ale'
-Plug 'preservim/nerdtree'
+Plug 'projekt0n/github-nvim-theme'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'airblade/vim-gitgutter'
 
 " Semantic language support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'nvim-lua/lsp-status.nvim'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'ray-x/lsp_signature.nvim'
+
+" Only because nvim-cmp _requires_ snippets
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
+Plug 'hrsh7th/vim-vsnip'
 
 " Syntactic language support
+Plug 'lervag/vimtex'
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'elixir-editors/vim-elixir'
 
 call plug#end()
 
+if has('nvim')
+    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
+    set inccommand=nosplit
+    noremap <C-q> :confirm qall<CR>
+end
+
+" Lua config
+lua << EOF
+require('lsp')
+require('plugins')
+EOF
+
+" Plugin settings
+let g:secure_modelines_allowed_items = [
+                \ "textwidth",   "tw",
+                \ "softtabstop", "sts",
+                \ "tabstop",     "ts",
+                \ "shiftwidth",  "sw",
+                \ "expandtab",   "et",   "noexpandtab", "noet",
+                \ "filetype",    "ft",
+                \ "foldmethod",  "fdm",
+                \ "readonly",    "ro",   "noreadonly", "noro",
+                \ "rightleft",   "rl",   "norightleft", "norl",
+                \ "colorcolumn"
+                \ ]
+
+" Do not use different font styles.
+let g:github_comment_style = "NONE"
+let g:github_keyword_style = "NONE"
+let g:github_function_style = "NONE"
+let g:github_variable_style = "NONE"
+
 " Rust
 let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+let g:rust_clip_command = 'xclip -selection clipboard'
 
+" Completion
+" Better completion
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
 " Better display for messages
 set cmdheight=2
 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -40,55 +96,67 @@ set updatetime=300
 " =============================================================================
 filetype plugin indent on
 set autoindent
-set relativenumber                          " Show line numbers relative to each other
-set number                                  " Show the current lines number w/ relative numbers around it
-set noswapfile                              " Don't create *.swp files
-set showcmd                                 " Display an incomplete command in the lower right corner
-set mouse=a                                 " Allow scrolling/visual mode with mouse; Cmd-R to disable in Terminal
+set hidden
+set noswapfile
+set signcolumn=yes
+set clipboard+=unnamedplus
+
+" Permanent undo
+set undodir=~/.vimdid
+set undofile
 
 " Decent wildmenu
 set wildmenu
 set wildmode=list:longest                   " Tab complete to longest common string, like bash
 
-" Searching
-set hlsearch      " Highlight searches
-set ignorecase    " Ignore case
-set smartcase     " Override 'ignorecase' option if the search contains upper case characters.
+" Proper search
+" set incsearch
+set ignorecase
+set smartcase
+set gdefault
+
+" Search results centered please
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
 
 " Indentation
-set shiftwidth=4  " Number of spaces to use in each autoindent step
-set tabstop=4     " Two tab spaces
-set softtabstop=4 " Number of spaces to skip or insert when <BS>ing or <Tab>ing
-set expandtab     " Spaces instead of tabs for better cross-editor compatibility
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set expandtab
 
-" Lightline
-let g:lightline = {}
-let g:lightline.colorscheme = 'iceberg'
+" Vimtex
+let g:vimtex_view_general_viewer = 'sumatraPDF'
+let g:vimtex_view_general_options = '-reuse-instance @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
-" Color column at 80 characters
-set colorcolumn=80
-set textwidth=80
+" =============================================================================
+" # GUI settings
+" =============================================================================
+set colorcolumn=100
+set relativenumber
+set number
+set showcmd
+set mouse=a
 
 " 24bit true color
 set termguicolors
 
-" Gruvbox specific
-let g:gruvbox_contrast_dark='hard'
-
 " Colorscheme
 syntax enable
-colorscheme iceberg
+colorscheme github_dark_default
 
 " Show white space
-set listchars=eol:¬,tab:>·,trail:·,extends:>,precedes:<,space:·
+" set listchars=tab:>·,trail:·,extends:>,precedes:<,space:·
+set listchars=nbsp:¬,extends:»,precedes:«,trail:•
 set list
 
 " =============================================================================
 " # Keyboard shortcuts
 " =============================================================================
-
-" NerdTree
-map <C-n> :NERDTreeToggle<CR>
 
 " Quick-save
 nmap <leader>w :w<CR>
@@ -127,12 +195,6 @@ tnoremap <C-c> <Esc>
 map H ^
 map L $
 
-" Neat X clipboard integration
-" ,p will paste clipboard into buffer
-" ,c will copy entire buffer into clipboard
-noremap <leader>p :read !xsel --clipboard --output<cr>
-noremap <leader>c :w !xsel -ib<cr><cr>
-
 " <leader><leader> toggles between buffers
 nnoremap <leader><leader> <c-^>
 
@@ -143,44 +205,6 @@ nnoremap <leader>, :set invlist<cr>
 nnoremap j gj
 nnoremap k gk
 
-" 'Smart' navigation
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-.> to trigger completion.
-inoremap <silent><expr> <c-.> coc#refresh()
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -188,4 +212,3 @@ inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
-
