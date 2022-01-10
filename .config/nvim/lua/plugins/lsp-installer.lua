@@ -1,7 +1,7 @@
 local lsp_installer = require("nvim-lsp-installer")
 local common_on_attach = require("plugins/lspconfig").common_on_attach
 local lsp_opts = require("plugins/lspconfig").lsp_opts
-local make_capabilities = require("plugins/cmp").make_capabilities
+local capabilities = require("plugins/cmp").capabilities
 
 -- Register and activate LSP servers
 local lsp_servers = {
@@ -21,7 +21,7 @@ lsp_installer.on_server_ready(function(server)
     flags = {
       debounce_text_changes = 150,
     },
-    capabilities = make_capabilities(),
+    capabilities = capabilities,
   }
 
   -- Customize the options passed to the server
