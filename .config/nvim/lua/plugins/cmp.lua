@@ -21,8 +21,26 @@ cmp.setup {
     border = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'}  -- in a clockwise order
   },
    mapping = {
-    -- Tab immediately completes. C-n/C-p to select.
-    ['<Tab>'] = cmp.mapping.confirm({ select = true })
+    -- Accept currently selected item.
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    -- Close completion menu
+    ["<C-e>"] = cmp.mapping.close(),
+    -- Cycle forward
+    ["<Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    -- Cycle backwards
+    ["<S-Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
   },
   sources = {
     { name = 'nvim_lsp', priority = 100 },
