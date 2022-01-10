@@ -45,7 +45,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp', priority = 100 },
     { name = 'path', priority = 30, },
-    { name = 'buffer', priority = 10 },
+    { name = 'buffer', priority = 10, keyword_length = 5 },
   },
   formatting = {
     format = lspkind.cmp_format {
