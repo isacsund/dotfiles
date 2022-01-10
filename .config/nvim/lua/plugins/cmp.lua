@@ -1,4 +1,6 @@
 local cmp = require("cmp")
+local lspkind = require("lspkind")
+lspkind.init()
 
 local M = {}
 
@@ -26,6 +28,17 @@ cmp.setup {
     { name = 'nvim_lsp', priority = 100 },
     { name = 'path', priority = 30, },
     { name = 'buffer', priority = 10 },
+  },
+  formatting = {
+    format = lspkind.cmp_format {
+      with_text = true,
+      menu = {
+        buffer = "[buf]",
+        nvim_lsp = "[LSP]",
+        path = "[path]",
+        vsnip = "[snip]",
+      },
+    },
   },
   experimental = {
     ghost_text = true
