@@ -36,6 +36,7 @@ require("packer").startup(function(use)
     },
   }
   use("ray-x/lsp_signature.nvim")
+  use("numToStr/Comment.nvim")
 
   -- Syntactic language support
   use {
@@ -54,4 +55,5 @@ require("plugins/lsp-signature")
 require("plugins/lsp-installer")
 require("plugins/lsp-status")
 require("plugins/cmp")
+require("plugins/comments")
 require("plugins/treesitter")
