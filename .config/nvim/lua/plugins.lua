@@ -37,6 +37,7 @@ require("packer").startup(function(use)
   }
   use("ray-x/lsp_signature.nvim")
   use("numToStr/Comment.nvim")
+  use("jose-elias-alvarez/null-ls.nvim")
 
   -- Syntactic language support
   use {
@@ -56,4 +57,5 @@ require("plugins/lsp-installer")
 require("plugins/lsp-status")
 require("plugins/cmp")
 require("plugins/comments")
+require("plugins/null-ls")
 require("plugins/treesitter")
