@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local attach_lsp_signature = require("plugins/lsp-signature").on_attach
 
 local M = {}
