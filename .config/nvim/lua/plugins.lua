@@ -8,17 +8,17 @@ require("packer").startup(function(use)
   -- GUI enhancements
   use("projekt0n/github-nvim-theme")
   use("nvim-lualine/lualine.nvim")
-  use {
+  use({
     "lewis6991/gitsigns.nvim",
     requires = {
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
     },
-  }
+  })
   use("nvim-lua/lsp-status.nvim")
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = { { "nvim-lua/plenary.nvim" } },
+  })
   use("romgrk/barbar.nvim")
 
   -- Semantic language support
@@ -29,23 +29,22 @@ require("packer").startup(function(use)
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-buffer")
   use("hrsh7th/cmp-path")
-  use {
+  use({
     "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-vsnip",
       "hrsh7th/vim-vsnip",
     },
-  }
+  })
   use("ray-x/lsp_signature.nvim")
   use("numToStr/Comment.nvim")
   use("jose-elias-alvarez/null-ls.nvim")
 
   -- Syntactic language support
-  use {
+  use({
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate"
-  }
-
+    run = ":TSUpdate",
+  })
 end)
 
 -- Plugin configs

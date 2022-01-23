@@ -1,9 +1,9 @@
-require('lualine').setup {
+require("lualine").setup({
   options = {
-    theme = 'github',
+    theme = "github",
     icons_enabled = false,
   },
   sections = {
-    lualine_c = { 'LspStatus()' },
+    lualine_c = { "LspStatus()" },
   },
-}
+})

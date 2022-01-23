@@ -10,7 +10,7 @@ local M = {}
 -- noselect: do not select, force user to select one from the menu
 vim.opt.completeopt = "menuone,noinsert,noselect"
 
-cmp.setup {
+cmp.setup({
   snippet = {
     -- REQUIRED by nvim-cmp.
     expand = function(args)
@@ -18,9 +18,9 @@ cmp.setup {
     end,
   },
   documentation = {
-    border = {'╭', '─', '╮', '│', '╯', '─', '╰', '│'}  -- in a clockwise order
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, -- in a clockwise order
   },
-   mapping = {
+  mapping = {
     -- Accept currently selected item.
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
     -- Close completion menu
@@ -43,12 +43,12 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'nvim_lsp', priority = 100 },
-    { name = 'path', priority = 30, },
-    { name = 'buffer', priority = 10, keyword_length = 5 },
+    { name = "nvim_lsp", priority = 100 },
+    { name = "path", priority = 30 },
+    { name = "buffer", priority = 10, keyword_length = 5 },
   },
   formatting = {
-    format = lspkind.cmp_format {
+    format = lspkind.cmp_format({
       with_text = true,
       menu = {
         buffer = "[buf]",
@@ -56,12 +56,12 @@ cmp.setup {
         path = "[path]",
         vsnip = "[snip]",
       },
-    },
+    }),
   },
   experimental = {
-    ghost_text = true
+    ghost_text = true,
   },
-}
+})
 
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 

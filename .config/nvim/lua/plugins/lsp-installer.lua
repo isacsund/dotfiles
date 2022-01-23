@@ -33,7 +33,7 @@ end)
 
 -- Automatically install if a required LSP server is missing.
 for _, lsp_name in ipairs(lsp_servers) do
-  local ok, lsp = require('nvim-lsp-installer.servers').get_server(lsp_name)
+  local ok, lsp = require("nvim-lsp-installer.servers").get_server(lsp_name)
 
   if ok and not lsp:is_installed() then
     vim.defer_fn(function()

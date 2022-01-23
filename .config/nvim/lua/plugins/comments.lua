@@ -1,4 +1,4 @@
-require("Comment").setup {
+require("Comment").setup({
 
   -- LHS of operator-pending mapping in NORMAL + VISUAL mode
   opleader = {
@@ -51,4 +51,4 @@ require("Comment").setup {
   --    Can be string (lua regex)
   --    Or function (that returns lua regex)
   ignore = nil,
-}
+})

@@ -10,7 +10,7 @@ local function buf_set_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
   -- Mappings
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap = true, silent = true }
 
   -- Code actions
   buf_set_keymap("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
@@ -32,7 +32,6 @@ local function buf_set_keymaps(bufnr)
   buf_set_keymap("n", "<leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
   buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-
 end
 
 -- Customize LSP behavior
@@ -58,9 +57,9 @@ function M.lsp_opts()
         completion = {
           autoimport = {
             enable = true,
-          }
-        }
-      }
+          },
+        },
+      },
     },
   }
 
@@ -69,9 +68,9 @@ function M.lsp_opts()
       Lua = {
         diagnostics = {
           -- Get the language server to recognize the `vim` global
-          globals = { 'vim', },
+          globals = { "vim" },
         },
-      }
+      },
     },
   }
 

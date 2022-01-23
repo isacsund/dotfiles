@@ -29,7 +29,7 @@ vim.opt.splitright = true
 
 -- Tabs as 4 spaces
 vim.opt.tabstop = 4
-vim.opt.softtabstop=4
+vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smarttab = true
 vim.opt.expandtab = true
@@ -67,12 +67,12 @@ vim.opt.wildmode = "list:longest"
 
 -- Show whitespace characters
 vim.opt.listchars = {
-    space = "⋅",
-    eol = "↴",
-    tab = "__",
-    trail = "•",
-    extends = "❯",
-    precedes = "❮",
-    nbsp = "_",
+  space = "⋅",
+  eol = "↴",
+  tab = "__",
+  trail = "•",
+  extends = "❯",
+  precedes = "❮",
+  nbsp = "_",
 }
 vim.opt.list = true
