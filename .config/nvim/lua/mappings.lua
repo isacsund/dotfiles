@@ -40,3 +40,7 @@ inoremap("<up>", "<nop>")
 inoremap("<down>", "<nop>")
 inoremap("<left>", "<nop>")
 inoremap("<right>", "<nop>")
+
+-- barbar
+nnoremap("<C-b>h", ":BufferPrevious<CR>")
+nnoremap("<C-b>l", ":BufferNext<CR>")

@@ -19,6 +19,7 @@ require("packer").startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use("romgrk/barbar.nvim")
 
   -- Semantic language support
   use("neovim/nvim-lspconfig")
@@ -51,6 +52,7 @@ end)
 require("plugins/github-theme")
 require("plugins/lualine")
 require("plugins/gitsigns")
+require("plugins/barbar")
 require("plugins/lspconfig")
 require("plugins/lsp-signature")
 require("plugins/lsp-installer")
