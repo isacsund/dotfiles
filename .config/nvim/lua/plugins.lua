@@ -2,60 +2,23 @@ require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
-  -- VIM enhancements
-  use("editorconfig/editorconfig-vim")
+  -- Dependencies of other plugins
+  use("nvim-lua/plenary.nvim")
 
-  -- GUI enhancements
-  use("projekt0n/github-nvim-theme")
-  use("nvim-lualine/lualine.nvim")
-  use({
-    "lewis6991/gitsigns.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-    },
-  })
-  use("nvim-lua/lsp-status.nvim")
-  use({
-    "nvim-telescope/telescope.nvim",
-    requires = { { "nvim-lua/plenary.nvim" } },
-  })
-  use("romgrk/barbar.nvim")
+  -- Editing enchancements and tools
+  use(require("configure.comment"))
+  use(require("configure.telescope"))
 
-  -- Semantic language support
-  use("neovim/nvim-lspconfig")
-  use("williamboman/nvim-lsp-installer")
-  use("nvim-lua/lsp_extensions.nvim")
-  use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-path")
-  use({
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
-    },
-  })
-  use("ray-x/lsp_signature.nvim")
-  use("numToStr/Comment.nvim")
-  use("jose-elias-alvarez/null-ls.nvim")
+  -- LSP + syntax
+  use(require("configure.completion"))
+  use(require("configure.lspconfig"))
+  use(require("configure.luasnip"))
+  use(require("configure.treesitter"))
 
-  -- Syntactic language support
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  })
+  -- UI + utils
+  use(require("configure.barbar"))
+  use(require("configure.gitsigns"))
+  use(require("configure.nightfox"))
+  use(require("configure.notify"))
+  use(require("configure.lualine"))
 end)
-
--- Plugin configs
-require("plugins/github-theme")
-require("plugins/lualine")
-require("plugins/gitsigns")
-require("plugins/barbar")
-require("plugins/lspconfig")
-require("plugins/lsp-signature")
-require("plugins/lsp-installer")
-require("plugins/lsp-status")
-require("plugins/cmp")
-require("plugins/comments")
-require("plugins/null-ls")
-require("plugins/treesitter")

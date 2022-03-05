@@ -68,7 +68,6 @@ vim.opt.wildmode = "list:longest"
 -- Show whitespace characters
 vim.opt.listchars = {
   space = "⋅",
-  eol = "↴",
   tab = "__",
   trail = "•",
   extends = "❯",
