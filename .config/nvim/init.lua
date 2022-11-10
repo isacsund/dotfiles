@@ -48,7 +48,7 @@ require("packer").startup(function(use)
     "echasnovski/mini.nvim",
   }
   use {
-    "bluz71/vim-nightfly-guicolors",
+    "EdenEast/nightfox.nvim",
   }
   use {
     "nvim-lualine/lualine.nvim",
@@ -150,12 +150,9 @@ vim.g.bufferline = {
   icon_close_tab = "x",
 }
 
--- Nightfly
-vim.g.nightflyItalics = 0
-
 -- Colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme nightfly]]
+vim.cmd [[colorscheme terafox]]
 -- }}}1
 
 -- Keymaps {{{1
