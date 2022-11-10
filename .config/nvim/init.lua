@@ -278,12 +278,25 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
+        "bashls",
         "clangd",
         "pyright",
         "rust_analyzer",
         "sumneko_lua",
     },
 })
+-- bashls
+require("lspconfig").bashls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+-- clangd
+require("lspconfig").clangd.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
 
 -- pyright
 require("lspconfig").pyright.setup({
@@ -297,6 +310,7 @@ require("lspconfig").pyright.setup({
         },
     },
 })
+
 -- rust_analyzer
 require("lspconfig").rust_analyzer.setup({
     on_attach = on_attach,
@@ -333,12 +347,6 @@ require("lspconfig").sumneko_lua.setup({
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
         },
     },
-})
-
--- clangd
-require("lspconfig").clangd.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
 })
 
 -- nvim-cmp
