@@ -8,6 +8,10 @@ require("packer").startup(function(use)
   use {
     "nvim-lua/plenary.nvim",
   }
+  -- Faster startup
+  use {
+    "lewis6991/impatient.nvim"
+  }
 
   -- Editing enchancements and tools
   use {
@@ -213,6 +217,8 @@ inoremap("<right>", "<nop>")
 -- }}}1
 
 -- Plugins {{{1
+require("impatient")
+
 -- Editing enchancements and tools {{{2
 -- Enable Comment.nvim
 require("Comment").setup()
