@@ -257,7 +257,7 @@ local on_attach = function(_, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable the following language servers
 local servers = {
@@ -281,7 +281,7 @@ end
 -- rust_analyzer
 require("lspconfig").rust_analyzer.setup({
   on_attach = require("lsp.utils").on_attach,
-  capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+  capabilities = capabilities,
   settings = {
     ["rust-analyzer"] = {
       checkOnSave = {
