@@ -252,6 +252,8 @@ local on_attach = function(_, bufnr)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, "Format", vim.lsp.buf.format or vim.lsp.buf.formatting, { desc = "Format current buffer with LSP" })
+
+  nmap("<leader>f", vim.lsp.buf.format)
 end
 
 -- nvim-cmp supports additional completion capabilities
