@@ -23,7 +23,8 @@ require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter",
   }
   use {
-    "williamboman/nvim-lsp-installer",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
   }
   use {
     "neovim/nvim-lspconfig",
@@ -273,7 +274,8 @@ local servers = {
 }
 
 -- Ensure the servers above are installed
-require("nvim-lsp-installer").setup({
+require("mason").setup()
+require("mason-lspconfig").setup({
   ensure_installed = servers,
 })
 
