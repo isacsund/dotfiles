@@ -1,69 +1,72 @@
 -- Packer {{{1
 require("packer").startup(function(use)
-  -- Package manager
-  use {
-    "wbthomason/packer.nvim",
-  }
-  -- Dependencies of other plugins
-  use {
-    "nvim-lua/plenary.nvim",
-  }
-  -- Faster startup
-  use {
-    "lewis6991/impatient.nvim"
-  }
+    -- Package manager
+    use({
+        "wbthomason/packer.nvim",
+    })
+    -- Dependencies of other plugins
+    use({
+        "nvim-lua/plenary.nvim",
+    })
+    -- Faster startup
+    use({
+        "lewis6991/impatient.nvim",
+    })
 
-  -- Editing enchancements and tools
-  use {
-    "numToStr/Comment.nvim",
-  }
+    -- Editing enchancements and tools
+    use({
+        "numToStr/Comment.nvim",
+    })
 
-  -- LSP + syntax
-  use {
-    "nvim-treesitter/nvim-treesitter",
-  }
-  use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-  }
-  use {
-    "neovim/nvim-lspconfig",
-  }
-  use {
-    "hrsh7th/nvim-cmp",
-    requires = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-    },
-  }
-  use {
-    "L3MON4D3/LuaSnip",
-    requires = {
-      "saadparwaiz1/cmp_luasnip",
-    },
-  }
+    -- LSP + syntax
+    use({
+        "nvim-treesitter/nvim-treesitter",
+    })
+    use({
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+    })
+    use({
+        "neovim/nvim-lspconfig",
+    })
+    use({
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-path",
+        },
+    })
+    use({
+        "L3MON4D3/LuaSnip",
+        requires = {
+            "saadparwaiz1/cmp_luasnip",
+        },
+    })
 
-  -- UI + utils
-  use {
-    "romgrk/barbar.nvim",
-  }
-  use {
-    "echasnovski/mini.nvim",
-  }
-  use {
-    "EdenEast/nightfox.nvim",
-  }
-  use {
-    "nvim-lualine/lualine.nvim",
-  }
-  use {
-    "lewis6991/gitsigns.nvim",
-  }
-  use {
-    "folke/trouble.nvim",
-  }
+    -- UI + utils
+    use({
+        "romgrk/barbar.nvim",
+    })
+    use({
+        "echasnovski/mini.nvim",
+    })
+    use({
+        "EdenEast/nightfox.nvim",
+    })
+    use({
+        "nvim-lualine/lualine.nvim",
+    })
+    use({
+        "lewis6991/gitsigns.nvim",
+    })
+    use({
+        "folke/trouble.nvim",
+    })
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+    })
 end)
 -- }}}1
 
@@ -99,7 +102,7 @@ vim.o.splitright = true
 
 -- Tabs as 4 spaces
 vim.o.tabstop = 4
-vim.o.softtabstop=4
+vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.smarttab = true
 vim.o.expandtab = true
@@ -151,31 +154,31 @@ vim.o.foldmethod = "marker"
 
 -- Barbar
 vim.g.bufferline = {
-  icons = false,
-  icon_close_tab = "x",
+    icons = false,
+    icon_close_tab = "x",
 }
 
 -- Colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme terafox]]
+vim.cmd([[colorscheme terafox]])
 -- }}}1
 
 -- Keymaps {{{1
 -- Wrapper functions {{{2
 local nnoremap = function(lhs, rhs, silent)
-  vim.keymap.set("n", lhs, rhs, { noremap = true, silent = silent })
+    vim.keymap.set("n", lhs, rhs, { noremap = true, silent = silent })
 end
 
 local inoremap = function(lhs, rhs)
-  vim.keymap.set("i", lhs, rhs, { noremap = true })
+    vim.keymap.set("i", lhs, rhs, { noremap = true })
 end
 
 local nmap = function(lhs, rhs)
-  vim.keymap.set("n", lhs, rhs, {})
+    vim.keymap.set("n", lhs, rhs, {})
 end
 
 local map = function(lhs, rhs)
-  vim.keymap.set("", lhs, rhs, {})
+    vim.keymap.set("", lhs, rhs, {})
 end
 -- }}}2
 
@@ -228,75 +231,83 @@ require("Comment").setup()
 -- LSP + syntax {{{2
 -- nvim-treesitter
 require("nvim-treesitter.configs").setup({
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {
-    "lua",
-    "python",
-    "rust",
-  },
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
+    -- Add languages to be installed here that you want installed for treesitter
+    ensure_installed = {
+        "lua",
+        "python",
+        "rust",
+    },
+    highlight = {
+        enable = true,
+    },
+    indent = {
+        enable = true,
+    },
 })
 
 -- nvim-lspconfig
 local on_attach = function(_, bufnr)
-  nmap("<leader>rn", vim.lsp.buf.rename)
-  nmap("<leader>ca", vim.lsp.buf.code_action)
+    nmap("<leader>rn", vim.lsp.buf.rename)
+    nmap("<leader>ca", vim.lsp.buf.code_action)
 
-  nmap("gd", vim.lsp.buf.definition)
-  nmap("gi", vim.lsp.buf.implementation)
+    nmap("gd", vim.lsp.buf.definition)
+    nmap("gi", vim.lsp.buf.implementation)
 
-  nmap("K", vim.lsp.buf.hover)
-  nmap("<C-k>", vim.lsp.buf.signature_help)
+    nmap("K", vim.lsp.buf.hover)
+    nmap("<C-k>", vim.lsp.buf.signature_help)
 
-  -- Lesser used LSP functionality
-  nmap("gD", vim.lsp.buf.declaration)
-  nmap("<leader>D", vim.lsp.buf.type_definition)
+    -- Lesser used LSP functionality
+    nmap("gD", vim.lsp.buf.declaration)
+    nmap("<leader>D", vim.lsp.buf.type_definition)
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", vim.lsp.buf.format or vim.lsp.buf.formatting, { desc = "Format current buffer with LSP" })
+    -- Create a command `:Format` local to the LSP buffer
+    vim.api.nvim_buf_create_user_command(
+        bufnr,
+        "Format",
+        vim.lsp.buf.format or vim.lsp.buf.formatting,
+        { desc = "Format current buffer with LSP" }
+    )
 
-  nmap("<leader>f", vim.lsp.buf.format)
+    nmap("<leader>f", vim.lsp.buf.format)
 end
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
--- Enable the following language servers
-local servers = {
-  "pyright",
-  "rust_analyzer",
-  "sumneko_lua",
-}
-
--- Ensure the servers above are installed
+-- Ensure the servers are installed
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = servers,
+    ensure_installed = {
+        "clangd",
+        "pyright",
+        "rust_analyzer",
+        "sumneko_lua",
+    },
 })
 
-for _, lsp in ipairs(servers) do
-  require("lspconfig")[lsp].setup({
+-- pyright
+require("lspconfig").pyright.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-  })
-end
-
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off",
+            },
+        },
+    },
+})
 -- rust_analyzer
 require("lspconfig").rust_analyzer.setup({
-  on_attach = require("lsp.utils").on_attach,
-  capabilities = capabilities,
-  settings = {
-    ["rust-analyzer"] = {
-      checkOnSave = {
-        command = "clippy",
-      },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        ["rust-analyzer"] = {
+            checkOnSave = {
+                command = "clippy",
+            },
+        },
     },
-  },
 })
 
 -- sumneko
@@ -305,84 +316,90 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require("lspconfig").sumneko_lua.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you"re using (most likely LuaJIT)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+require("lspconfig").sumneko_lua.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you"re using (most likely LuaJIT)
+                version = "LuaJIT",
+                -- Setup your lua path
+                path = runtime_path,
+            },
+            diagnostics = {
+                globals = { "vim" },
+            },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+        },
     },
-  },
-}
+})
+
+-- clangd
+require("lspconfig").clangd.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
 
 -- nvim-cmp
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
 cmp.setup({
-  preselect = cmp.PreselectMode.None,
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  completion = {
-    completeopt = "menu,menuone,noinsert",
-  },
-  mapping = cmp.mapping.preset.insert {
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<CR>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+    preselect = cmp.PreselectMode.None,
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
     },
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  },
-  sources = {
-    { name = "luasnip" },
-    { name = "nvim_lsp" },
-    { name = "nvim_lua" },
-    { name = "path" },
-    { name = "buffer", keyword_length = 8 },
-  },
-  experimental = {
-    ghost_text = true,
-  },
+    completion = {
+        completeopt = "menu,menuone,noinsert",
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+    }),
+    sources = {
+        { name = "luasnip" },
+        { name = "nvim_lsp" },
+        { name = "nvim_lua" },
+        { name = "path" },
+        { name = "buffer", keyword_length = 8 },
+    },
+    experimental = {
+        ghost_text = true,
+    },
 })
 -- }}}2
 
 -- UI + utils {{{2
 -- barbar.nvim
 vim.g.bufferline = {
-  icons = false,
-  icon_close_tab = "x",
+    icons = false,
+    icon_close_tab = "x",
 }
 
 -- mini.nvim.trailspace
@@ -390,37 +407,61 @@ require("mini.trailspace").setup()
 
 -- lualine.nvim
 require("lualine").setup({
-  options = {
-    theme = "auto",
-    icons_enabled = false,
-  },
+    options = {
+        theme = "auto",
+        icons_enabled = false,
+    },
 })
 
 -- gitsigns.nvim
 require("gitsigns").setup({
-  signs = {
-    add = { text = "+" },
-    change = { text = "~" },
-    delete = { text = "_" },
-    topdelete = { text = "‾" },
-    changedelete = { text = "~" },
-  },
+    signs = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+    },
 })
 
 -- trouble.nvim
 require("trouble").setup({
-  icons = false,
-  fold_open = "v", -- icon used for open folds
-  fold_closed = ">", -- icon used for closed folds
-  indent_lines = false, -- add an indent guide below the fold icons
-  signs = {
-    -- icons / text used for a diagnostic
-    error = "error",
-    warning = "warn",
-    hint = "hint",
-    information = "info"
-  },
-  use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+    icons = false,
+    fold_open = "v", -- icon used for open folds
+    fold_closed = ">", -- icon used for closed folds
+    indent_lines = false, -- add an indent guide below the fold icons
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "error",
+        warning = "warn",
+        hint = "hint",
+        information = "info",
+    },
+    use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 })
+
+-- null-ls
+local null_ls = require("null-ls")
+null_ls.setup({
+    -- Diagnostics
+    null_ls.builtins.diagnostics.shellcheck.with({
+        diagnostics_format = "[#{c}] #{m} (#{s})",
+    }),
+    null_ls.builtins.diagnostics.pylint.with({
+        diagnostics_format = "[#{c}] #{m} (#{s})",
+    }),
+
+    -- Formatting
+    null_ls.builtins.formatting.shfmt.with({
+        extra_args = { "-i", "4", "-sr", "-ci" },
+    }),
+    null_ls.builtins.formatting.stylua.with({
+        extra_args = { "--indent-type", "Spaces" },
+    }),
+
+    -- Code actions
+    null_ls.builtins.code_actions.shellcheck,
+})
+
 -- }}}2
 -- }}}1
