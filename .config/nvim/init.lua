@@ -1,76 +1,90 @@
--- Packer {{{1
-require("packer").startup(function(use)
-    -- Package manager
-    use({
-        "wbthomason/packer.nvim",
+-- Bootstrapping {{{1
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
     })
-    -- Dependencies of other plugins
-    use({
-        "nvim-lua/plenary.nvim",
-    })
-    -- Faster startup
-    use({
-        "lewis6991/impatient.nvim",
-    })
-
-    -- Editing enchancements and tools
-    use({
-        "numToStr/Comment.nvim",
-    })
-
-    -- LSP + syntax
-    use({
-        "nvim-treesitter/nvim-treesitter",
-    })
-    use({
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-    })
-    use({
-        "neovim/nvim-lspconfig",
-    })
-    use({
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-path",
-        },
-    })
-    use({
-        "L3MON4D3/LuaSnip",
-        requires = {
-            "saadparwaiz1/cmp_luasnip",
-        },
-    })
-
-    -- UI + utils
-    use({
-        "romgrk/barbar.nvim",
-    })
-    use({
-        "echasnovski/mini.nvim",
-    })
-    use({
-        "EdenEast/nightfox.nvim",
-    })
-    use({
-        "nvim-lualine/lualine.nvim",
-    })
-    use({
-        "lewis6991/gitsigns.nvim",
-    })
-    use({
-        "folke/trouble.nvim",
-    })
-    use({
-        "jose-elias-alvarez/null-ls.nvim",
-    })
-end)
+end
+vim.opt.rtp:prepend(lazypath)
 -- }}}1
 
--- General {{{1
+local plugins = {
+    -- Dependencies of other plugins
+    "nvim-lua/plenary.nvim",
+
+    ------------------------
+    -- General Enhancements
+    ------------------------
+    -- Filetree
+    "kyazdani42/nvim-tree.lua",
+    -- Commenting
+    "numToStr/Comment.nvim",
+    -- Syntax highlighting
+    { "nvim-treesitter/nvim-treesitter",  build = ":TSUpdate" },
+    -- Git in sign column
+    "lewis6991/gitsigns.nvim",
+    -- Git UI
+    "sindrets/diffview.nvim",
+    -- Faster startup
+    "lewis6991/impatient.nvim",
+    -- Search and replace in multiple files
+    "windwp/nvim-spectre",
+
+    ---------------------
+    -- LSP and Completion
+    ---------------------
+    {
+        "VonHeikemen/lsp-zero.nvim",
+        branch = "v1.x",
+        dependencies = {
+            -- LSP Support
+            { "neovim/nvim-lspconfig" },
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
+            -- Autocompletion
+            { "hrsh7th/nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lsp" },
+            { "hrsh7th/cmp-buffer" },
+            { "hrsh7th/cmp-path" },
+            { "saadparwaiz1/cmp_luasnip" },
+            { "hrsh7th/cmp-nvim-lua" },
+            -- Snippets
+            { "L3MON4D3/LuaSnip" },
+            { "rafamadriz/friendly-snippets" },
+        },
+    },
+    "jose-elias-alvarez/null-ls.nvim",
+    -----------------------
+    -- Visual Enhancements
+    -----------------------
+    -- Color theme
+    "Abstract-IDE/Abstract-cs",
+    -- Icons
+    "kyazdani42/nvim-web-devicons",
+    -- Status line
+    "nvim-lualine/lualine.nvim",
+    -- Diagnostics
+    "folke/trouble.nvim",
+    -- TODO comments
+    "folke/todo-comments.nvim",
+    -- Automatic word highlighting
+    "RRethy/vim-illuminate",
+    -- Buffer bar
+    "akinsho/bufferline.nvim",
+    -- Mini
+    "echasnovski/mini.nvim",
+}
+
+require("lazy").setup(plugins, {})
+
+----------
+-- General
+----------
 -- Use space as leader key
 vim.g.mapleader = " "
 
@@ -152,19 +166,15 @@ vim.o.list = true
 -- Enable folding
 vim.o.foldmethod = "marker"
 
--- Barbar
-vim.g.bufferline = {
-    icons = false,
-    icon_close_tab = "x",
-}
-
 -- Colorscheme
 vim.o.termguicolors = true
-vim.cmd([[colorscheme terafox]])
--- }}}1
+vim.cmd([[colorscheme abscs]])
 
--- Keymaps {{{1
--- Wrapper functions {{{2
+----------
+-- Keymaps
+----------
+
+-- Wrapper functions {{{1
 local nnoremap = function(lhs, rhs, silent)
     vim.keymap.set("n", lhs, rhs, { noremap = true, silent = silent })
 end
@@ -180,7 +190,7 @@ end
 local map = function(lhs, rhs)
     vim.keymap.set("", lhs, rhs, {})
 end
--- }}}2
+-- }}}1
 
 -- Quick-save
 nmap("<leader>w", ":w<CR>")
@@ -200,7 +210,7 @@ nnoremap("<Leader><Leader>", "<c-^>")
 nnoremap("j", "gj")
 nnoremap("k", "gk")
 
--- Switch barbar buffers
+-- Switch bufferline buffers
 nnoremap("<Leader>H", ":BufferPrevious<CR>")
 nnoremap("<Leader>L", ":BufferNext<CR>")
 
@@ -208,6 +218,16 @@ nnoremap("<Leader>L", ":BufferNext<CR>")
 nnoremap("<leader>xx", "<cmd>Trouble<cr>")
 nnoremap("<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>")
 nnoremap("<leader>xd", "<cmd>Trouble document_diagnostics<cr>")
+
+-- NvimTree
+nnoremap("<C-n>", ":NvimTreeToggle<CR>")
+
+-- nvim-spectre
+nnoremap("<leader>sr", "<cmd>lua require('spectre').open()<CR>")
+
+-- vim-illuminate
+nnoremap("[[", "<cmd>lua require('illuminate').goto_next_reference()<CR>")
+nnoremap("]]", "<cmd>lua require('illuminate').goto_prev_reference()<CR>")
 
 -- No arrow keys
 nnoremap("<up>", "<nop>")
@@ -218,25 +238,21 @@ inoremap("<up>", "<nop>")
 inoremap("<down>", "<nop>")
 inoremap("<left>", "<nop>")
 inoremap("<right>", "<nop>")
--- }}}1
 
--- Plugins {{{1
-require("impatient")
+----------
+-- Plugins
+----------
 
--- Editing enchancements and tools {{{2
+---------------------------------
+-- Editing echancements and tools
+------------------------
+require("nvim-tree").setup()
 -- Enable Comment.nvim
-require("Comment").setup()
--- }}}2
+require("Comment").setup({})
 
--- LSP + syntax {{{2
+-- LSP
 -- nvim-treesitter
 require("nvim-treesitter.configs").setup({
-    -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = {
-        "lua",
-        "python",
-        "rust",
-    },
     highlight = {
         enable = true,
     },
@@ -245,8 +261,10 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
--- nvim-lspconfig
-local on_attach = function(_, bufnr)
+local lsp = require("lsp-zero")
+lsp.preset("recommended")
+
+lsp.on_attach(function(client, bufnr)
     nmap("<leader>rn", vim.lsp.buf.rename)
     nmap("<leader>ca", vim.lsp.buf.code_action)
 
@@ -260,48 +278,19 @@ local on_attach = function(_, bufnr)
     nmap("gD", vim.lsp.buf.declaration)
     nmap("<leader>D", vim.lsp.buf.type_definition)
 
-    -- Create a command `:Format` local to the LSP buffer
-    vim.api.nvim_buf_create_user_command(
-        bufnr,
-        "Format",
-        vim.lsp.buf.format or vim.lsp.buf.formatting,
-        { desc = "Format current buffer with LSP" }
-    )
-
     nmap("<leader>f", vim.lsp.buf.format)
-end
+end)
 
--- nvim-cmp supports additional completion capabilities
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- Ensure the servers are installed
-require("mason").setup()
-require("mason-lspconfig").setup({
-    ensure_installed = {
-        "bashls",
-        "clangd",
-        "pyright",
-        "rust_analyzer",
-        "sumneko_lua",
-    },
+lsp.ensure_installed({
+    "bashls",
+    "clangd",
+    "hls",
+    "pyright",
+    "rust_analyzer",
 })
--- bashls
-require("lspconfig").bashls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
--- clangd
-require("lspconfig").clangd.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
 
 -- pyright
-require("lspconfig").pyright.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
+lsp.use("pyright", {
     settings = {
         python = {
             analysis = {
@@ -311,107 +300,30 @@ require("lspconfig").pyright.setup({
     },
 })
 
--- rust_analyzer
-require("lspconfig").rust_analyzer.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
+lsp.use("rust_analyzer", {
     settings = {
         ["rust-analyzer"] = {
             checkOnSave = {
                 command = "clippy",
             },
+            completion = {
+                autoimport = {
+                    enable = true,
+                },
+            },
         },
     },
 })
 
--- sumneko
--- Make runtime files discoverable to the server
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+lsp.nvim_workspace()
+lsp.setup()
 
-require("lspconfig").sumneko_lua.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you"re using (most likely LuaJIT)
-                version = "LuaJIT",
-                -- Setup your lua path
-                path = runtime_path,
-            },
-            diagnostics = {
-                globals = { "vim" },
-            },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-        },
-    },
-})
-
--- nvim-cmp
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-
-cmp.setup({
-    preselect = cmp.PreselectMode.None,
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
-    completion = {
-        completeopt = "menu,menuone,noinsert",
-    },
-    mapping = cmp.mapping.preset.insert({
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-        }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-    }),
-    sources = {
-        { name = "luasnip" },
-        { name = "nvim_lsp" },
-        { name = "nvim_lua" },
-        { name = "path" },
-        { name = "buffer", keyword_length = 8 },
-    },
-    experimental = {
-        ghost_text = true,
-    },
-})
--- }}}2
-
--- UI + utils {{{2
--- barbar.nvim
-vim.g.bufferline = {
-    icons = false,
-    icon_close_tab = "x",
-}
+-- UI + utils
+-- bufferline
+require("bufferline").setup({})
 
 -- mini.nvim.trailspace
-require("mini.trailspace").setup()
+require("mini.trailspace").setup({})
 
 -- lualine.nvim
 require("lualine").setup({
@@ -435,9 +347,6 @@ require("gitsigns").setup({
 -- trouble.nvim
 require("trouble").setup({
     icons = false,
-    fold_open = "v", -- icon used for open folds
-    fold_closed = ">", -- icon used for closed folds
-    indent_lines = false, -- add an indent guide below the fold icons
     signs = {
         -- icons / text used for a diagnostic
         error = "error",
@@ -445,31 +354,28 @@ require("trouble").setup({
         hint = "hint",
         information = "info",
     },
-    use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 })
 
 -- null-ls
 local null_ls = require("null-ls")
 null_ls.setup({
-    -- Diagnostics
-    null_ls.builtins.diagnostics.shellcheck.with({
-        diagnostics_format = "[#{c}] #{m} (#{s})",
-    }),
-    null_ls.builtins.diagnostics.pylint.with({
-        diagnostics_format = "[#{c}] #{m} (#{s})",
-    }),
+    sources = {
+        -- Diagnostics
+        null_ls.builtins.diagnostics.shellcheck.with({
+            diagnostics_format = "[#{c}] #{m} (#{s})",
+        }),
+        null_ls.builtins.diagnostics.flake8,
+        null_ls.builtins.diagnostics.codespell,
 
-    -- Formatting
-    null_ls.builtins.formatting.shfmt.with({
-        extra_args = { "-i", "4", "-sr", "-ci" },
-    }),
-    null_ls.builtins.formatting.stylua.with({
-        extra_args = { "--indent-type", "Spaces" },
-    }),
+        -- Formatting
+        null_ls.builtins.formatting.shfmt.with({
+            extra_args = { "-i", "4", "-sr", "-ci" },
+        }),
+        null_ls.builtins.formatting.stylua.with({
+            extra_args = { "--indent-type", "Spaces" },
+        }),
 
-    -- Code actions
-    null_ls.builtins.code_actions.shellcheck,
+        -- Code actions
+        null_ls.builtins.code_actions.shellcheck,
+    }
 })
-
--- }}}2
--- }}}1
