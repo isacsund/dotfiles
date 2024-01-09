@@ -62,7 +62,12 @@ local plugins = {
     -- Visual Enhancements
     -----------------------
     -- Color theme
-    "Abstract-IDE/Abstract-cs",
+    {
+        "mcchrish/zenbones.nvim",
+        dependencies = {
+            { "rktjmp/lush.nvim" },
+        },
+    },
     -- Icons
     "kyazdani42/nvim-web-devicons",
     -- Status line
@@ -134,9 +139,6 @@ vim.o.colorcolumn = "100"
 -- Prevent buffer moving when adding/deleting sign.
 vim.o.signcolumn = "yes"
 
--- Indicate that a dark background should be used
-vim.o.background = "dark"
-
 -- Always use system clipboard
 vim.o.clipboard = "unnamedplus"
 
@@ -166,8 +168,23 @@ vim.o.list = true
 vim.o.foldmethod = "marker"
 
 -- Colorscheme
+vim.o.background = "dark"
 vim.o.termguicolors = true
-vim.cmd([[colorscheme abscs]])
+
+vim.g.zenbones_darkness = "stark"
+vim.g.zenbones_italic_comments = false
+
+vim.cmd([[colorscheme zenbones]])
+
+-- Override italics for strings and numbers
+local lush = require("lush")
+local specs = lush.parse(function()
+  return {
+    Constant { base.Constant, gui = '' },
+    Number { base.Number, gui = '' },
+  }
+end)
+lush.apply(lush.compile(specs))
 
 ----------
 -- Keymaps
