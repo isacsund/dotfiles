@@ -1,87 +1,87 @@
 -- Bootstrapping {{{1
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 -- }}}1
 
 local plugins = {
-    -- Dependencies of other plugins
-    "nvim-lua/plenary.nvim",
+	-- Dependencies of other plugins
+	"nvim-lua/plenary.nvim",
 
-    ------------------------
-    -- General Enhancements
-    ------------------------
-    -- Filetree
-    "kyazdani42/nvim-tree.lua",
-    -- Commenting
-    "numToStr/Comment.nvim",
-    -- Syntax highlighting
-    { "nvim-treesitter/nvim-treesitter",  build = ":TSUpdate" },
-    -- Git in sign column
-    "lewis6991/gitsigns.nvim",
-    -- Git UI
-    "sindrets/diffview.nvim",
-    -- Faster startup
-    "lewis6991/impatient.nvim",
-    -- Search and replace in multiple files
-    "windwp/nvim-spectre",
+	------------------------
+	-- General Enhancements
+	------------------------
+	-- Filetree
+	"kyazdani42/nvim-tree.lua",
+	-- Commenting
+	"numToStr/Comment.nvim",
+	-- Syntax highlighting
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	-- Git in sign column
+	"lewis6991/gitsigns.nvim",
+	-- Git UI
+	"sindrets/diffview.nvim",
+	-- Faster startup
+	"lewis6991/impatient.nvim",
+	-- Search and replace in multiple files
+	"windwp/nvim-spectre",
 
-    ---------------------
-    -- LSP and Completion
-    ---------------------
-    {
-        "VonHeikemen/lsp-zero.nvim",
-        branch = "v1.x",
-        dependencies = {
-            -- LSP Support
-            { "neovim/nvim-lspconfig" },
-            { "williamboman/mason.nvim" },
-            { "williamboman/mason-lspconfig.nvim" },
-            -- Autocompletion
-            { "hrsh7th/nvim-cmp" },
-            { "hrsh7th/cmp-nvim-lsp" },
-            { "hrsh7th/cmp-buffer" },
-            { "hrsh7th/cmp-path" },
-            { "saadparwaiz1/cmp_luasnip" },
-            { "hrsh7th/cmp-nvim-lua" },
-            -- Snippets
-            { "L3MON4D3/LuaSnip" },
-            { "rafamadriz/friendly-snippets" },
-        },
-    },
-    -----------------------
-    -- Visual Enhancements
-    -----------------------
-    -- Color theme
-    {
-        "mcchrish/zenbones.nvim",
-        dependencies = {
-            { "rktjmp/lush.nvim" },
-        },
-    },
-    -- Icons
-    "kyazdani42/nvim-web-devicons",
-    -- Status line
-    "nvim-lualine/lualine.nvim",
-    -- Diagnostics
-    "folke/trouble.nvim",
-    -- TODO comments
-    "folke/todo-comments.nvim",
-    -- Automatic word highlighting
-    "RRethy/vim-illuminate",
-    -- Buffer bar
-    "akinsho/bufferline.nvim",
-    -- Mini
-    "echasnovski/mini.nvim",
+	---------------------
+	-- LSP and Completion
+	---------------------
+	{
+		"VonHeikemen/lsp-zero.nvim",
+		branch = "v1.x",
+		dependencies = {
+			-- LSP Support
+			{ "neovim/nvim-lspconfig" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
+			-- Autocompletion
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			-- Snippets
+			{ "L3MON4D3/LuaSnip" },
+			{ "rafamadriz/friendly-snippets" },
+		},
+	},
+	-----------------------
+	-- Visual Enhancements
+	-----------------------
+	-- Color theme
+	{
+		"mcchrish/zenbones.nvim",
+		dependencies = {
+			{ "rktjmp/lush.nvim" },
+		},
+	},
+	-- Icons
+	"kyazdani42/nvim-web-devicons",
+	-- Status line
+	"nvim-lualine/lualine.nvim",
+	-- Diagnostics
+	"folke/trouble.nvim",
+	-- TODO comments
+	"folke/todo-comments.nvim",
+	-- Automatic word highlighting
+	"RRethy/vim-illuminate",
+	-- Buffer bar
+	"akinsho/bufferline.nvim",
+	-- Mini
+	"echasnovski/mini.nvim",
 }
 
 require("lazy").setup(plugins, {})
@@ -154,12 +154,12 @@ vim.o.wildmode = "list:longest"
 
 -- Show whitespace characters
 vim.opt.listchars = {
-    space = "⋅",
-    tab = "__",
-    trail = "•",
-    extends = "❯",
-    precedes = "❮",
-    nbsp = "_",
+	space = "⋅",
+	tab = "__",
+	trail = "•",
+	extends = "❯",
+	precedes = "❮",
+	nbsp = "_",
 }
 vim.o.list = true
 
@@ -178,10 +178,10 @@ vim.cmd([[colorscheme zenbones]])
 -- Override italics for strings and numbers
 local lush = require("lush")
 local specs = lush.parse(function()
-  return {
-    Constant { base.Constant, gui = '' },
-    Number { base.Number, gui = '' },
-  }
+	return {
+		Constant { base.Constant, gui = ''},
+		Number { base.Number, gui = '' },
+	}
 end)
 lush.apply(lush.compile(specs))
 
@@ -191,19 +191,19 @@ lush.apply(lush.compile(specs))
 
 -- Wrapper functions {{{1
 local nnoremap = function(lhs, rhs, silent)
-    vim.keymap.set("n", lhs, rhs, { noremap = true, silent = silent })
+	vim.keymap.set("n", lhs, rhs, { noremap = true, silent = silent })
 end
 
 local inoremap = function(lhs, rhs)
-    vim.keymap.set("i", lhs, rhs, { noremap = true })
+	vim.keymap.set("i", lhs, rhs, { noremap = true })
 end
 
 local nmap = function(lhs, rhs)
-    vim.keymap.set("n", lhs, rhs, {})
+	vim.keymap.set("n", lhs, rhs, {})
 end
 
 local map = function(lhs, rhs)
-    vim.keymap.set("", lhs, rhs, {})
+	vim.keymap.set("", lhs, rhs, {})
 end
 -- }}}1
 
@@ -268,66 +268,66 @@ require("Comment").setup({})
 -- LSP
 -- nvim-treesitter
 require("nvim-treesitter.configs").setup({
-    highlight = {
-        enable = true,
-    },
-    indent = {
-        enable = true,
-    },
+	highlight = {
+		enable = true,
+	},
+	indent = {
+		enable = true,
+	},
 })
 
 local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.on_attach(function(client, bufnr)
-    nmap("<leader>rn", vim.lsp.buf.rename)
-    nmap("<leader>ca", vim.lsp.buf.code_action)
+	nmap("<leader>rn", vim.lsp.buf.rename)
+	nmap("<leader>ca", vim.lsp.buf.code_action)
 
-    nmap("gd", vim.lsp.buf.definition)
-    nmap("gi", vim.lsp.buf.implementation)
+	nmap("gd", vim.lsp.buf.definition)
+	nmap("gi", vim.lsp.buf.implementation)
 
-    nmap("K", vim.lsp.buf.hover)
-    nmap("<C-k>", vim.lsp.buf.signature_help)
+	nmap("K", vim.lsp.buf.hover)
+	nmap("<C-k>", vim.lsp.buf.signature_help)
 
-    -- Lesser used LSP functionality
-    nmap("gD", vim.lsp.buf.declaration)
-    nmap("<leader>D", vim.lsp.buf.type_definition)
+	-- Lesser used LSP functionality
+	nmap("gD", vim.lsp.buf.declaration)
+	nmap("<leader>D", vim.lsp.buf.type_definition)
 
-    nmap("<leader>f", vim.lsp.buf.format)
+	nmap("<leader>f", vim.lsp.buf.format)
 end)
 
 lsp.ensure_installed({
-    "bashls",
-    "clangd",
-    "pyright",
-    "rust_analyzer",
-    "zls",
+	"bashls",
+	"clangd",
+	"pyright",
+	"rust_analyzer",
+	"zls",
 })
 
 -- pyright
 lsp.use("pyright", {
-    settings = {
-        python = {
-            analysis = {
-                typeCheckingMode = "off",
-            },
-        },
-    },
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "off",
+			},
+		},
+	},
 })
 
 lsp.use("rust_analyzer", {
-    settings = {
-        ["rust-analyzer"] = {
-            checkOnSave = {
-                command = "clippy",
-            },
-            completion = {
-                autoimport = {
-                    enable = true,
-                },
-            },
-        },
-    },
+	settings = {
+		["rust-analyzer"] = {
+			checkOnSave = {
+				command = "clippy",
+			},
+			completion = {
+				autoimport = {
+					enable = true,
+				},
+			},
+		},
+	},
 })
 
 lsp.nvim_workspace()
@@ -342,31 +342,31 @@ require("mini.trailspace").setup({})
 
 -- lualine.nvim
 require("lualine").setup({
-    options = {
-        theme = "auto",
-        icons_enabled = false,
-    },
+	options = {
+		theme = "auto",
+		icons_enabled = false,
+	},
 })
 
 -- gitsigns.nvim
 require("gitsigns").setup({
-    signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
-    },
+	signs = {
+		add = { text = "+" },
+		change = { text = "~" },
+		delete = { text = "_" },
+		topdelete = { text = "‾" },
+		changedelete = { text = "~" },
+	},
 })
 
 -- trouble.nvim
 require("trouble").setup({
-    icons = false,
-    signs = {
-        -- icons / text used for a diagnostic
-        error = "error",
-        warning = "warn",
-        hint = "hint",
-        information = "info",
-    },
+	icons = false,
+	signs = {
+		-- icons / text used for a diagnostic
+		error = "error",
+		warning = "warn",
+		hint = "hint",
+		information = "info",
+	},
 })
