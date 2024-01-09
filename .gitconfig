@@ -1,0 +1,22 @@
+[user]
+	name = Isac Sund
+	email = isac@isacsund.com
+[code]
+	editor = nvim
+[core]
+	editor = nvim
+	autocrlf = input
+	safecrlf = true
+[alias]
+	s = status
+	l = log --oneline
+	lp = log --patch --ext-diff
+	ds = diff --staged --ext-diff
+	dshow = show --ext-diff
+	tree = log --oneline --graph
+	pushf = push --force-with-lease
+	reword = commit --amend
+[pull]
+	ff = only
+[diff]
+	external = difft
