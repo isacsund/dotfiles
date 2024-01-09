@@ -118,12 +118,11 @@ vim.o.mouse = "a"
 vim.o.splitbelow = true
 vim.o.splitright = true
 
--- Tabs as 4 spaces
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
-vim.o.smarttab = true
-vim.o.expandtab = true
+-- Tabs
+vim.o.tabstop = 8
+vim.o.softtabstop = -1
+vim.o.shiftwidth = 8
+vim.o.noexpandtab = true
 
 -- Auto indent
 vim.o.smartindent = true
