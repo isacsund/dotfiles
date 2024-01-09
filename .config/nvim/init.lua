@@ -302,6 +302,7 @@ lsp.ensure_installed({
     "clangd",
     "pyright",
     "rust_analyzer",
+    "zls",
 })
 
 -- pyright
