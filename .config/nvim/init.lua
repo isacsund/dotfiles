@@ -155,7 +155,7 @@ vim.o.wildmode = "list:longest"
 -- Show whitespace characters
 vim.opt.listchars = {
 	space = "⋅",
-	tab = "__",
+	tab = "❯⋅",
 	trail = "•",
 	extends = "❯",
 	precedes = "❮",
