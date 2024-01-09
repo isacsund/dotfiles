@@ -300,7 +300,6 @@ end)
 lsp.ensure_installed({
     "bashls",
     "clangd",
-    "hls",
     "pyright",
     "rust_analyzer",
 })
