@@ -58,7 +58,6 @@ local plugins = {
             { "rafamadriz/friendly-snippets" },
         },
     },
-    "jose-elias-alvarez/null-ls.nvim",
     -----------------------
     -- Visual Enhancements
     -----------------------
@@ -354,28 +353,4 @@ require("trouble").setup({
         hint = "hint",
         information = "info",
     },
-})
-
--- null-ls
-local null_ls = require("null-ls")
-null_ls.setup({
-    sources = {
-        -- Diagnostics
-        null_ls.builtins.diagnostics.shellcheck.with({
-            diagnostics_format = "[#{c}] #{m} (#{s})",
-        }),
-        null_ls.builtins.diagnostics.flake8,
-        null_ls.builtins.diagnostics.codespell,
-
-        -- Formatting
-        null_ls.builtins.formatting.shfmt.with({
-            extra_args = { "-i", "4", "-sr", "-ci" },
-        }),
-        null_ls.builtins.formatting.stylua.with({
-            extra_args = { "--indent-type", "Spaces" },
-        }),
-
-        -- Code actions
-        null_ls.builtins.code_actions.shellcheck,
-    }
 })
