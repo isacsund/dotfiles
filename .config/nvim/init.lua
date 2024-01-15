@@ -340,6 +340,9 @@ require("bufferline").setup({})
 -- mini.nvim.trailspace
 require("mini.trailspace").setup({})
 
+-- mini.nvim.align
+require("mini.align").setup({})
+
 -- lualine.nvim
 require("lualine").setup({
 	options = {
