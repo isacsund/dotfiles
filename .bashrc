@@ -17,3 +17,6 @@ export HISTSIZE=5000
 # Better prompt
 GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='[\u@\h \W\e[0;36m$(__git_ps1 " (%s)")\e[0m]\$ '
+
+# Aliases
+alias ls="ls --color=always"
